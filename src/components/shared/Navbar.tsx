@@ -20,7 +20,10 @@ const navbar = () => {
 					<a className="h2-bold text-slate-100" href="/">
 						BUFF<span className="text-orange-500">163</span>
 					</a>
-					<a className="text-lg font-semibold" href="/Market">
+					<a
+						className="text-lg font-semibold"
+						onClick={() => navigate("/Market")}
+					>
 						MARKET
 					</a>
 				</div>
@@ -28,7 +31,10 @@ const navbar = () => {
 					<SearchBar />
 				</div>
 				<div className="flex flex-row gap-8 items-center">
-					<a className="text-xl font-semibold" href="/create-post">
+					<a
+						className="text-xl font-semibold"
+						onClick={() => navigate("/create-post")}
+					>
 						SELL
 					</a>
 					<div className="bg-orange-500 rounded-md h-10 flex flex-row gap-2 items-center p-4">
