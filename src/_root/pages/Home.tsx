@@ -5,13 +5,23 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="relative flex w-full patterned-div">
-			<div className="radial-grad absolute top-0 left-0">
-				<div className="z-10 w-full h-3/4 flex flex-row px-64">
-					<div className=" flex  w-1/2 h-full flex-col justify-center pl-80 gap-10">
+		<div className="w-full h-dvh patterned-div">
+			<div className="radial-grad ">
+				<div className="z-10 w-full h-full p-8 flex items-center flex-col gap-4 lg:flex-row-reverse lg:justify-evenly lg:h-3/4 ">
+					<div className="">
+						<div className="flex justify-center">
+							<img
+								src="/assets/images/hero-main.png"
+								alt="hero-main"
+								max-width={600}
+								max-height={600}
+								className="animated-div"
+							/>
+						</div>
+					</div>
+					<div className="flex flex-col gap-4 max-w-[500px]">
 						<h1 className="h1-bold">
-							Revolutionize Your CS2 Trading
-							<br /> Experience with{" "}
+							Revolutionize Your CS2 Trading Experience with{" "}
 							<span>
 								<a className="h2-bold text-slate-100" href="/">
 									BUFF
@@ -19,32 +29,33 @@ const Home = () => {
 								</a>
 							</span>
 						</h1>
-						<h2 className="w-3/4 text-lg">
+						<h2 className="text-lg">
 							The most sophisticated marketplace and trading
 							tools, facilitating millions of skin transactions
 							and indexing billions of skins. Experience unmatched
 							ease and security when buying and selling CS2 skins.
 						</h2>
-						<Button
-							type="button"
-							className="shad-button_primary w-64 h-14 rounded-lg flex  flex-row items-center justify-center"
-							onClick={() => navigate("/Market")}
-						>
-							<div className="h3-bold">Marketplace</div>
-							<div>
-								<img src="/assets/icons/market.svg" alt="" />
-							</div>
-						</Button>
-					</div>
-					<div className="  w-1/2 ">
-						<div className="flex h-full items-center justify-center">
-							<img
-								src="/assets/images/hero-main.png"
-								alt="hero-main"
-								width={700}
-								height={700}
-								className="animated-div"
-							/>
+						<div className="flex flex-row gap-4">
+							<Button
+								type="button"
+								className="shad-button_primary w-full h-14 rounded-lg flex flex-row items-center justify-center"
+								onClick={() => navigate("/Market")}
+							>
+								<div className="h3-bold">Marketplace</div>
+								<div>
+									<img
+										src="/assets/icons/market.svg"
+										alt=""
+									/>
+								</div>
+							</Button>
+							<Button
+								type="button"
+								className="shad-button_dark_4 w-full h-14 rounded-lg flex flex-row items-center justify-center"
+								onClick={() => navigate("/Market")}
+							>
+								<div className="h3-bold">Link</div>
+							</Button>
 						</div>
 					</div>
 				</div>

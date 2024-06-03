@@ -14,13 +14,41 @@ const footer = () => {
 					<p>Blog</p>
 				</div>
 				<div className="flex flex-row gap-8">
-					<img src="/assets/icons/FB.png" alt="" />
-					<img src="/assets/icons/DISCORD.png" alt="" />
-					<img src="/assets/icons/INSTAGRAM.png" alt="" />
-					<img src="/assets/icons/REDDIT.png" alt="" />
-					<img src="/assets/icons/TIKTOK.png" alt="" />
-					<img src="/assets/icons/X.png" alt="" />
-					<img src="/assets/icons/YT.png" alt="" />
+					<img
+						src="/assets/icons/FB.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/DISCORD.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/INSTAGRAM.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/REDDIT.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/TIKTOK.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/X.png"
+						alt=""
+						className="footer-icon"
+					/>
+					<img
+						src="/assets/icons/YT.png"
+						alt=""
+						className="footer-icon"
+					/>
 				</div>
 			</div>
 			<div className="text-center">

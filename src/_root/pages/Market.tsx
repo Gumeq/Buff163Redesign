@@ -19,7 +19,7 @@ const Market = () => {
 		const resizeObserver = new ResizeObserver((entries) => {
 			if (entries[0].target) {
 				const width = entries[0].contentRect.width;
-				const itemWidth = 200; // Adjust this to your SkinCard width
+				const itemWidth = 180; // Adjust this to your SkinCard width
 				const count = Math.floor(width / itemWidth);
 				setVisibleCount(count);
 			}
@@ -38,14 +38,20 @@ const Market = () => {
 
 	return (
 		<div className="w-full">
-			<AdSlider></AdSlider>
-			<div ref={containerRef} className="pt-8 w-full px-4 md:px-64  ">
+			<div className="hidden lg:block">
+				<AdSlider></AdSlider>
+			</div>
+
+			<div
+				ref={containerRef}
+				className="pt-4 w-full px-2 lg:px-64 lg:pt-8"
+			>
 				<h2 className="h3-bold text-left pb-4">Newest Posts</h2>
 				<div className="">
 					{isPostLoading && !recentPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-4 ">
+						<ul className="flex flex-row gap-1 lg:gap-4 ">
 							{recentPosts?.documents
 								.slice(0, visibleCount)
 								.map((recentPosts: Models.Document) => (
@@ -60,13 +66,13 @@ const Market = () => {
 					)}
 				</div>
 			</div>
-			<div ref={containerRef} className="pt-8 w-full px-4 md:px-64  ">
+			<div ref={containerRef} className="pt-8 w-full px-4 lg:px-64 ">
 				<h2 className="h3-bold text-left pb-4">Recommended AK-47</h2>
 				<div className="">
 					{isCheapPostLoading && !cheapPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-4 ">
+						<ul className="flex flex-row gap-1 lg:gap-4 ">
 							{cheapPosts?.documents
 								.slice(0, visibleCount)
 								.map((cheapPosts: Models.Document) => (

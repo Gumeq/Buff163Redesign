@@ -28,6 +28,8 @@ module.exports = {
 				"dark-2": "#212121",
 				"dark-3": "#2c2c2c",
 				"dark-4": "#373737",
+				"dark-5": "424242",
+				"dark-6": "4D4D4D",
 				"light-1": "#FFFFFF",
 				"light-2": "#EFEFEF",
 				"light-3": "#7878A3",

@@ -4,10 +4,12 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
 	return (
-		<div className="w-full">
+		<div className="w-full h-dvh">
 			<Navbar />
 			<Outlet />
-			<Footer />
+			<div className="hidden lg:block">
+				<Footer />
+			</div>
 		</div>
 	);
 };

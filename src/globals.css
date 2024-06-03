@@ -285,7 +285,7 @@
 }
 
 .search-manufacturer__input {
-	@apply w-full h-10 pl-12 bg-dark-3 rounded-lg outline-none text-lg cursor-pointer;
+	@apply w-full h-10 pl-12 bg-dark-3 rounded-lg outline-none text-base cursor-pointer;
 }
 
 .search-manufacturer__options {
@@ -330,4 +330,9 @@
 
 .animated-div {
 	animation: up-and-down 3s ease-in-out infinite; /* Animation name, duration, easing, and repeat */
+}
+
+.footer-icon {
+	height: 50px;
+	width: 50px;
 }
