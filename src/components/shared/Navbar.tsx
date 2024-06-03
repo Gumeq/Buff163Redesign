@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 
 import { useNavigate } from "react-router-dom";
-import ProfilePicture from "./ProfilePicture";
 
 const navbar = () => {
 	// Log Out Button

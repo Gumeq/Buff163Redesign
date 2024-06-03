@@ -1,5 +1,5 @@
-import { useUserContext } from "@/context/AuthContext";
-import React, { useState } from "react";
+// import { useUserContext } from "@/context/AuthContext";
+import { useState } from "react";
 
 function ProfilePicture() {
 	// State to manage visibility of the overlay
@@ -10,7 +10,7 @@ function ProfilePicture() {
 		setShowOverlay(!showOverlay);
 	};
 
-	const { user } = useUserContext();
+	// const { user } = useUserContext();
 
 	return (
 		<div>

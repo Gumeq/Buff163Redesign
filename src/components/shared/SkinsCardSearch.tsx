@@ -6,7 +6,6 @@ import { useSkins } from "@/context/SkinsContext";
 const SkinsCardSearch = (searchParams: FilterProps) => {
 	const [data, setData] = useState<any>(null);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
 	const { item, setItem } = useSkins();
 
 	useEffect(() => {
@@ -25,7 +24,7 @@ const SkinsCardSearch = (searchParams: FilterProps) => {
 	}, [searchParams.name, setItem]);
 
 	if (loading) return <p>Loading...</p>;
-	if (error) return <p>{error}</p>;
+	console.log(item);
 
 	return (
 		<div className="">

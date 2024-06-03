@@ -1,7 +1,4 @@
 import PostForm from "@/components/forms/PostForm";
-import { FilterProps } from "@/types";
-import React, { useEffect, useState } from "react";
-import { fetchSkin } from "@/utils";
 
 const CreatePost = () => {
 	return (

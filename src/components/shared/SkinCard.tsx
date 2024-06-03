@@ -1,5 +1,4 @@
 import { Models } from "appwrite";
-import React from "react";
 
 type PostCardProps = {
 	post: Models.Document;
