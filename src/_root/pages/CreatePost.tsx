@@ -2,8 +2,8 @@ import PostForm from "@/components/forms/PostForm";
 
 const CreatePost = () => {
 	return (
-		<div className="flex flex-1">
-			<div className="py-16 px-64 flex flex-col gap-8">
+		<div className="flex flex-1 common-container ">
+			<div className="">
 				<div className="flex-start gap-4 justify-start w-full">
 					<img
 						src="/assets/icons/sell.svg"
@@ -13,7 +13,7 @@ const CreatePost = () => {
 					/>
 					<h2 className="h3-bold ">Sell skins</h2>
 				</div>
-				<PostForm />
+				<PostForm action="Create" />
 			</div>
 		</div>
 	);

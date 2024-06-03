@@ -5,9 +5,9 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="relative flex w-full h-4/5 patterned-div">
+		<div className="relative flex w-full patterned-div">
 			<div className="radial-grad absolute top-0 left-0">
-				<div className="z-10 w-full h-full flex flex-row px-64">
+				<div className="z-10 w-full h-3/4 flex flex-row px-64">
 					<div className=" flex  w-1/2 h-full flex-col justify-center pl-80 gap-10">
 						<h1 className="h1-bold">
 							Revolutionize Your CS2 Trading
@@ -19,7 +19,7 @@ const Home = () => {
 								</a>
 							</span>
 						</h1>
-						<h2 className="w-1/2 text-lg">
+						<h2 className="w-3/4 text-lg">
 							The most sophisticated marketplace and trading
 							tools, facilitating millions of skin transactions
 							and indexing billions of skins. Experience unmatched
@@ -41,8 +41,9 @@ const Home = () => {
 							<img
 								src="/assets/images/hero-main.png"
 								alt="hero-main"
-								width={800}
-								height={800}
+								width={700}
+								height={700}
+								className="animated-div"
 							/>
 						</div>
 					</div>

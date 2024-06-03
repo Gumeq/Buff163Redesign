@@ -52,7 +52,6 @@ const SignInForm = () => {
 
 		if (isLoggedIn) {
 			form.reset();
-
 			navigate("/");
 		} else {
 			return toast({ title: "Sign up failed. Plase try again." });

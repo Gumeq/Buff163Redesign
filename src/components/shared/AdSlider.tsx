@@ -6,18 +6,18 @@ import { useNavigate } from "react-router-dom";
 
 const AdSlider = () => {
 	var settings = {
-		dots: true,
+		dots: false,
 		infinite: true,
-		speed: 500,
+		speed: 1000,
 		slidesToShow: 1,
 		slidesToScroll: 1,
-		autoplay: false,
-		autoplaySpeed: 2000,
+		autoplay: true,
+		autoplaySpeed: 5000,
 		arrows: false,
 	};
 	const navigate = useNavigate();
 	return (
-		<div className="h-80 w-full bg-dark-3">
+		<div className="mt-8 h-80 w-full bg-dark-3">
 			<Slider {...settings} className="w-full h-full ">
 				<div className="bg-dark-4 h-80 w-full px-96">
 					<div className="flex flex-row items-center">

@@ -8,6 +8,7 @@ import RootLayout from "./_root/RootLayout";
 import { Toaster } from "@/components/ui/toaster";
 import CreatePost from "./_root/pages/CreatePost";
 import Market from "./_root/pages/Market";
+import UpdatePost from "./_root/pages/UpdatePost";
 
 const App = () => {
 	return (
@@ -23,10 +24,10 @@ const App = () => {
 				<Route element={<RootLayout />}>
 					<Route index element={<Home />} />
 					<Route path="/create-post" element={<CreatePost />} />
+					<Route path="/update-post/:id" element={<UpdatePost />} />
 					<Route path="/market" element={<Market />} />
 				</Route>
 			</Routes>
-
 			<Toaster />
 		</main>
 	);

@@ -61,3 +61,8 @@ export type SkinSellProps = {
 	imageUrl: string;
 	weapon: string;
 };
+export type SkinSellPropsUpdate = {
+	postId: string;
+	price: string;
+	wear: string;
+};

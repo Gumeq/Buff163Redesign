@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
 import { appwriteConfig, account, databases, avatars } from "./config";
-import { SkinSellProps, INewUser } from "@/types";
+import { SkinSellProps, INewUser, SkinSellPropsUpdate } from "@/types";
 
 // ============================================================
 // AUTH
@@ -144,23 +144,23 @@ export async function createPost(post: SkinSellProps) {
 
 // ============================== GET POSTS
 
-// export async function getPostById(postId?: string) {
-// 	if (!postId) throw Error;
+export async function getPostById(postId?: string) {
+	if (!postId) throw Error;
 
-// 	try {
-// 		const post = await databases.getDocument(
-// 			appwriteConfig.databaseId,
-// 			appwriteConfig.skinsCollectionId,
-// 			postId
-// 		);
+	try {
+		const post = await databases.getDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.skinsCollectionId,
+			postId
+		);
 
-// 		if (!post) throw Error;
+		if (!post) throw Error;
 
-// 		return post;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
+		return post;
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 export async function getRecentPosts() {
 	try {
@@ -178,40 +178,55 @@ export async function getRecentPosts() {
 	}
 }
 
-// export async function getCheapPosts() {
-// 	try {
-// 		const posts = await databases.listDocuments(
-// 			appwriteConfig.databaseId,
-// 			appwriteConfig.skinsCollectionId,
-// 			[Query.orderDesc("price"), Query.limit(20)]
-// 		);
+export async function getCheapPosts() {
+	try {
+		const posts = await databases.listDocuments(
+			appwriteConfig.databaseId,
+			appwriteConfig.skinsCollectionId,
+			[Query.equal("weapon", ["AK-47"]), Query.limit(20)]
+		);
 
-// 		if (!posts) throw Error;
+		if (!posts) throw Error;
 
-// 		return posts;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
+		return posts;
+	} catch (error) {
+		console.log(error);
+	}
+}
 
-// export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
-// 	const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
+// ============================== GET USER BY ID
+export async function getUserById(userId: string) {
+	try {
+		const user = await databases.getDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.userCollectionId,
+			userId
+		);
 
-// 	if (pageParam) {
-// 		queries.push(Query.cursorAfter(pageParam.toString()));
-// 	}
+		if (!user) throw Error;
 
-// 	try {
-// 		const posts = await databases.listDocuments(
-// 			appwriteConfig.databaseId,
-// 			appwriteConfig.skinsCollectionId,
-// 			queries
-// 		);
+		return user;
+	} catch (error) {
+		console.log(error);
+	}
+}
 
-// 		if (!posts) throw Error;
-
-// 		return posts;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// }
+export async function updatePost(post: SkinSellPropsUpdate) {
+	try {
+		const updatedPost = await databases.updateDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.skinsCollectionId,
+			post.postId,
+			{
+				price: post.price,
+				wear: post.wear,
+			}
+		);
+		if (!updatedPost) {
+			throw Error;
+		}
+		return updatedPost;
+	} catch (error) {
+		console.log(error);
+	}
+}

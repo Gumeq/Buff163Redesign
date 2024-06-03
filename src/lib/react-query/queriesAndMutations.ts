@@ -5,8 +5,12 @@ import {
 	signOutAccount,
 	createPost,
 	getRecentPosts,
+	getCheapPosts,
+	getUserById,
+	getPostById,
+	updatePost,
 } from "../appwrite/api";
-import { INewUser, SkinSellProps } from "@/types";
+import { INewUser, SkinSellProps, SkinSellPropsUpdate } from "@/types";
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 
 export const useCreateUserAccount = () => {
@@ -39,17 +43,43 @@ export const useCreatePost = () => {
 	});
 };
 
-// export const useGetPostById = (postId?: string) => {
-// 	return useQuery({
-// 		queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
-// 		queryFn: () => getPostById(postId),
-// 		enabled: !!postId,
-// 	});
-// };
+export const useUpdatePost = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (post: SkinSellPropsUpdate) => updatePost(post),
+		onSuccess: (data) => {
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+			});
+		},
+	});
+};
+
+export const useGetPostById = (postId?: string) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
+		queryFn: () => getPostById(postId),
+		enabled: !!postId,
+	});
+};
 
 export const useGetRecentPosts = () => {
 	return useQuery({
 		queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
 		queryFn: getRecentPosts,
+	});
+};
+export const useGetCheapPosts = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_CHEAP_POSTS],
+		queryFn: getCheapPosts,
+	});
+};
+
+export const useGetUserById = (userId: string) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
+		queryFn: () => getUserById(userId),
+		enabled: !!userId,
 	});
 };

@@ -267,7 +267,7 @@
 
 	/* Button */
 	.shad-button_primary {
-		@apply bg-orange-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
+		@apply h-12 px-5 bg-orange-500 hover:bg-primary-500 text-light-1 flex gap-2 !important;
 	}
 
 	.shad-button_dark_4 {
@@ -285,7 +285,7 @@
 }
 
 .search-manufacturer__input {
-	@apply w-full h-10 pl-12 bg-dark-3  outline-none text-lg cursor-pointer;
+	@apply w-full h-10 pl-12 bg-dark-3 rounded-lg outline-none text-lg cursor-pointer;
 }
 
 .search-manufacturer__options {
@@ -314,4 +314,20 @@
 		rgba(33, 33, 33, 0) 0%,
 		rgba(33, 33, 33, 100) 80%
 	);
+}
+
+@keyframes up-and-down {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(
+			-20px
+		); /* Adjust the value to change the amplitude */
+	}
+}
+
+.animated-div {
+	animation: up-and-down 3s ease-in-out infinite; /* Animation name, duration, easing, and repeat */
 }

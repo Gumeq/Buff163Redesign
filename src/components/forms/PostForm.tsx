@@ -14,6 +14,7 @@ import {
 	Form,
 	FormControl,
 	FormField,
+	FormDescription,
 	FormItem,
 	FormLabel,
 	FormMessage,
@@ -21,16 +22,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { PostValidation } from "@/lib/validation";
 import { Models } from "appwrite";
-import { useCreatePost } from "@/lib/react-query/queriesAndMutations";
+import {
+	useCreatePost,
+	useUpdatePost,
+} from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
 import { useToast } from "../ui/use-toast";
+import { Loader } from "lucide-react";
 
 type PostFormProps = {
 	post?: Models.Document;
+	action: "Create" | "Update";
 };
 
-const PostForm = ({ post }: PostFormProps) => {
-	const { mutateAsync: createPost } = useCreatePost();
+const PostForm = ({ post, action }: PostFormProps) => {
+	const { mutateAsync: createPost, isPending: isLoadingCreate } =
+		useCreatePost();
+	const { mutateAsync: updatePost, isPending: isLoadingUpdate } =
+		useUpdatePost();
 	const { user } = useUserContext();
 
 	const { toast } = useToast();
@@ -39,7 +48,7 @@ const PostForm = ({ post }: PostFormProps) => {
 
 	const [data, setData] = useState<any>(null);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [skin, setSkin] = useState("M4A4 | Asiimov");
+	const [skin, setSkin] = useState(post ? post.name : "M4A4 | Asiimov");
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 	};
@@ -57,24 +66,36 @@ const PostForm = ({ post }: PostFormProps) => {
 	async function onSubmit(values: z.infer<typeof PostValidation>) {
 		// Do something with the form values.
 		// ✅ This will be type-safe and validated.
-
-		const newPost = await createPost({
-			seller: user.id,
-			name: data.name,
-			imageUrl: data.img,
-			weapon: data.weapon,
-			wear: values.wear,
-			price: values.price,
-		});
-
-		if (!newPost) {
-			toast({
-				title: "Please try again",
+		// ACTION = UPDATE
+		if (post && action === "Update") {
+			const updatedPost = await updatePost({
+				postId: post.$id,
+				wear: values.wear,
+				price: values.price,
 			});
-		}
 
+			if (!updatedPost) {
+				toast({
+					title: `${action} post failed. Please try again.`,
+				});
+				return navigate(`/update-post/${post.$id}`);
+			}
+		} else {
+			const newPost = await createPost({
+				seller: user.id,
+				name: data.name,
+				imageUrl: data.img,
+				weapon: data.weapon,
+				wear: values.wear,
+				price: values.price,
+			});
+			if (!newPost) {
+				toast({
+					title: "Please try again",
+				});
+			}
+		}
 		navigate("/");
-		console.log(values);
 	}
 
 	useEffect(() => {
@@ -92,11 +113,17 @@ const PostForm = ({ post }: PostFormProps) => {
 		getData();
 	}, [skin]);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading)
+		return (
+			<div>
+				<Loader></Loader>
+				<p>Loading...</p>
+			</div>
+		);
 
 	return (
-		<div className="flex flex-row gap-16">
-			<div className="flex flex-row gap-4">
+		<div className="flex flex-col gap-16 w-full  max-w-5xl">
+			<div className="flex flex-row gap-8 items-center">
 				<h2 className="text-lg font-bold">Select skin to sell</h2>
 				<form action="" className="" onSubmit={handleSearch}>
 					<div className="w-80">
@@ -105,19 +132,20 @@ const PostForm = ({ post }: PostFormProps) => {
 				</form>
 			</div>
 			<div className="flex flex-row gap-16">
-				<div className="bg-gradient-to-t from-dark-3 to-white rounded-3xl relative">
-					<div className="z-20 text-white absolute bottom-10 left-10 text-4xl flex flex-col gap-4">
+				<div className="bg-gradient-to-t from-dark-3 to-white rounded-xl relative max-h-80 max-w-80">
+					<div className="z-20 text-white absolute bottom-4 left-4 text-xl flex flex-col gap-2">
 						<h1 className="font-bold ">{data.name}</h1>
 						<h1 className=" font-bold">
 							<span className="text-orange-500">$ </span>
 							{data.price}
 						</h1>
 					</div>
-					<div className="bg-orange-500 w-64 h-16 absolute rounded-br-3xl rounded-tl-3xl text-3xl font-bold flex items-center justify-center">
+					<div className="bg-orange-500 w-40 h-10 absolute rounded-br-xl rounded-tl-xl text-xl font-bold flex items-center justify-center">
 						Factory New
 					</div>
-
-					<img src={data.img} alt="" />
+					<div className="">
+						<img src={data.img} alt="" />
+					</div>
 				</div>
 				<div>
 					<Form {...form}>
@@ -140,6 +168,12 @@ const PostForm = ({ post }: PostFormProps) => {
 												{...field}
 											/>
 										</FormControl>
+										<FormDescription className="shad-form_label">
+											<p className="text-zinc-400">
+												Wear value should be smaller
+												than 1
+											</p>
+										</FormDescription>
 										<FormMessage />
 									</FormItem>
 								)}
@@ -163,8 +197,26 @@ const PostForm = ({ post }: PostFormProps) => {
 									</FormItem>
 								)}
 							/>
-							<Button type="button">Cancel</Button>
-							<Button type="submit">Submit</Button>
+							<div className="flex flex-row gap-4 items-center justify-between">
+								<Button
+									type="submit"
+									className="shad-button_primary whitespace-nowrap"
+									disabled={
+										isLoadingCreate || isLoadingUpdate
+									}
+								>
+									{(isLoadingCreate || isLoadingUpdate) && (
+										<Loader />
+									)}
+									{action} Post
+								</Button>
+								<Button
+									type="button"
+									className="shad-button_dark_4 whitespace-nowrap w-1/2"
+								>
+									Cancel
+								</Button>
+							</div>
 						</form>
 					</Form>
 				</div>

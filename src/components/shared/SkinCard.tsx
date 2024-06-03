@@ -1,4 +1,7 @@
+import { useUserContext } from "@/context/AuthContext";
+import { useGetUserById } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
+import { Link } from "react-router-dom";
 
 type PostCardProps = {
 	post: Models.Document;
@@ -24,24 +27,65 @@ export const getExterior = (input: string): string => {
 };
 
 const SkinCard = ({ post }: PostCardProps) => {
-	return (
-		<div className="bg-gradient-to-t from-dark-3 to-white rounded-[12px] relative h-[200px] w-[200px]">
-			<div className="z-20 text-white absolute bottom-2 left-2 text-md flex flex-col ">
-				<h1 className="font-bold ">{post.name}</h1>
-				<h1 className=" font-bold">
-					<span className="text-orange-500">$ </span>
-					{post.price}
-				</h1>
-			</div>
-			<div className="bg-orange-500 max-w-[120px] max-h-[30px] absolute rounded-br-[12px] rounded-tl-[12px] text-sm p-2 font-bold flex items-center justify-center">
-				{getExterior(post.wear)}
-			</div>
+	const { data: skinSeller } = useGetUserById(post.seller.$id);
+	const { user } = useUserContext();
 
-			<img
-				src={post.imageUrl}
-				alt="img"
-				className="absolute  w-full p-2"
-			/>
+	function Something() {
+		if (user.id === post.seller.$id) {
+			return (
+				<Link to={`/update-post/${post.$id}`}>
+					<img src="/assets/icons/edit.svg" alt="edit" />
+				</Link>
+			);
+		} else {
+			return <div>Add To Cart</div>;
+		}
+	}
+
+	return (
+		<div className="flex flex-col items-center relative h-[300px] overflow-hidden">
+			<div className=" z-20 bg-gradient-to-t from-zinc-400 to-dark-4 rounded-tl-[12px] rounded-tr-[12px] h-[200px] w-[200px] p-2">
+				<div className="absolute font-bold text-sm text-nowrap w-[180px] overflow-hidden">
+					<h2 className=" ">{post.name}</h2>
+					<h2 className="text-zinc-400 text-xs">
+						{getExterior(post.wear)}
+					</h2>
+				</div>
+				{/* <div className="bg-orange-500 z-20 w-[100px] h-[25px] absolute top-0 font-bold text-[13px] flex items-center justify-center rounded-br-[12px] rounded-tl-[12px]">
+					{getExterior(post.wear)}
+				</div> */}
+				<img
+					src={post.imageUrl}
+					alt="img"
+					className="absolute  w-full "
+				/>
+			</div>
+			<div className="z-40 bg-gradient-to-b from-zinc-400 to-orange-500 h-[12px] w-[200px]"></div>
+			<div className=" absolute bottom-0 left-0 pt-12 h-[120px] w-[200px] bg-dark-3 rounded-[12px] p-2  ">
+				<div className="flex flex-col w-full h-full gap-1">
+					<div className="z-20 text-white flex flex-row w-full justify-between items-center ">
+						<h2 className=" font-bold text-lg">
+							{post.price}
+							<span className="text-orange-500"> $</span>
+						</h2>
+						<div>
+							{skinSeller && (
+								<img
+									src={skinSeller.imageUrl}
+									alt=""
+									className="rounded-full"
+									width={30}
+									height={30}
+								/>
+							)}
+						</div>
+					</div>
+					<div className="flex flex-row justify-between items-center pt-1 pr-1">
+						<div className="text-sm text-zinc-300">{post.wear}</div>
+						<Something></Something>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
