@@ -16,7 +16,6 @@ import {
 } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
-import Skeleton from "react-loading-skeleton";
 
 const navigation = [
 	{ name: "Market", href: "/Market", current: true },
