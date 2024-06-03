@@ -115,10 +115,8 @@ const PostForm = ({ post }: PostFormProps) => {
 					<div className="z-20 text-white absolute bottom-10 left-10 text-4xl flex flex-col gap-4">
 						<h1 className="font-bold ">{data.name}</h1>
 						<h1 className=" font-bold">
-							<span className="text-orange-500">$ </span>69
-							<span className="text-orange-500 text-2xl">
-								.99
-							</span>
+							<span className="text-orange-500">$ </span>
+							{data.price}
 						</h1>
 					</div>
 					<div className="bg-orange-500 w-64 h-16 absolute rounded-br-3xl rounded-tl-3xl text-3xl font-bold flex items-center justify-center">

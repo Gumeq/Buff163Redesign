@@ -7,7 +7,7 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="relative flex w-full h-full patterned-div">
+		<div className="relative flex w-full h-4/5 patterned-div">
 			<div className="radial-grad absolute top-0 left-0">
 				<div className="z-10 w-full h-full flex flex-row px-64">
 					<div className=" flex  w-1/2 h-full flex-col justify-center pl-80 gap-10">

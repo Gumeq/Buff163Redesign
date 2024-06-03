@@ -8,7 +8,7 @@ const RootLayout = () => {
 		<div className="w-full">
 			<Navbar />
 			{/* <AdSlider></AdSlider> */}
-			<section className="flex flex-1 h-4/5">
+			<section className="flex flex-1 h-full">
 				<Outlet />
 			</section>
 			<Footer />
