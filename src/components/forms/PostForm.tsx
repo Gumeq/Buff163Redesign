@@ -1,9 +1,7 @@
 "use client";
 import SearchSkin from "../shared/SearchSkin";
 import React, { useEffect, useState } from "react";
-import { useSkins } from "@/context/SkinsContext";
 import { fetchSkin } from "@/utils";
-import { SkinSellProps } from "@/types";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -15,7 +13,6 @@ import { Button } from "@/components/ui/button";
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
@@ -33,8 +30,7 @@ type PostFormProps = {
 };
 
 const PostForm = ({ post }: PostFormProps) => {
-	const { mutateAsync: createPost, isPending: isLoadingCreate } =
-		useCreatePost();
+	const { mutateAsync: createPost } = useCreatePost();
 	const { user } = useUserContext();
 
 	const { toast } = useToast();
@@ -43,7 +39,6 @@ const PostForm = ({ post }: PostFormProps) => {
 
 	const [data, setData] = useState<any>(null);
 	const [loading, setLoading] = useState<boolean>(true);
-	const [error, setError] = useState<string | null>(null);
 	const [skin, setSkin] = useState("M4A4 | Asiimov");
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -88,7 +83,7 @@ const PostForm = ({ post }: PostFormProps) => {
 				const result = await fetchSkin({ name: skin });
 				setData(result);
 			} catch (err) {
-				setError("Failed to fetch data");
+				console.log(err);
 			} finally {
 				setLoading(false);
 			}
@@ -98,7 +93,6 @@ const PostForm = ({ post }: PostFormProps) => {
 	}, [skin]);
 
 	if (loading) return <p>Loading...</p>;
-	// if (error) return <p>{error}</p>;
 
 	return (
 		<div className="flex flex-row gap-16">

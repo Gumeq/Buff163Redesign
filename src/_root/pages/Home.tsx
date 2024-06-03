@@ -1,6 +1,4 @@
-import AdSlider from "@/components/shared/AdSlider";
 import { Button } from "@headlessui/react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {

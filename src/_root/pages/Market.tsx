@@ -1,17 +1,10 @@
 import AdSlider from "@/components/shared/AdSlider";
 import SkinCard from "@/components/shared/SkinCard";
-import { getPostById } from "@/lib/appwrite/api";
 import { useGetRecentPosts } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
-import React from "react";
-
 const Market = () => {
-	const {
-		data: recentPosts,
-		isLoading: isPostLoading,
-		isError: isErrorPosts,
-	} = useGetRecentPosts();
+	const { data: recentPosts, isLoading: isPostLoading } = useGetRecentPosts();
 
 	return (
 		<div className="max-w-full">

@@ -1,7 +1,7 @@
 import { ID, Query } from "appwrite";
 
-import { appwriteConfig, account, databases, storage, avatars } from "./config";
-import { SkinSellProps, INewUser, IUpdateUser } from "@/types";
+import { appwriteConfig, account, databases, avatars } from "./config";
+import { SkinSellProps, INewUser } from "@/types";
 
 // ============================================================
 // AUTH
@@ -144,23 +144,23 @@ export async function createPost(post: SkinSellProps) {
 
 // ============================== GET POSTS
 
-export async function getPostById(postId?: string) {
-	if (!postId) throw Error;
+// export async function getPostById(postId?: string) {
+// 	if (!postId) throw Error;
 
-	try {
-		const post = await databases.getDocument(
-			appwriteConfig.databaseId,
-			appwriteConfig.skinsCollectionId,
-			postId
-		);
+// 	try {
+// 		const post = await databases.getDocument(
+// 			appwriteConfig.databaseId,
+// 			appwriteConfig.skinsCollectionId,
+// 			postId
+// 		);
 
-		if (!post) throw Error;
+// 		if (!post) throw Error;
 
-		return post;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 		return post;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
 
 export async function getRecentPosts() {
 	try {
@@ -194,24 +194,24 @@ export async function getRecentPosts() {
 // 	}
 // }
 
-export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
-	const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
+// export async function getInfinitePosts({ pageParam }: { pageParam: number }) {
+// 	const queries: any[] = [Query.orderDesc("$updatedAt"), Query.limit(9)];
 
-	if (pageParam) {
-		queries.push(Query.cursorAfter(pageParam.toString()));
-	}
+// 	if (pageParam) {
+// 		queries.push(Query.cursorAfter(pageParam.toString()));
+// 	}
 
-	try {
-		const posts = await databases.listDocuments(
-			appwriteConfig.databaseId,
-			appwriteConfig.skinsCollectionId,
-			queries
-		);
+// 	try {
+// 		const posts = await databases.listDocuments(
+// 			appwriteConfig.databaseId,
+// 			appwriteConfig.skinsCollectionId,
+// 			queries
+// 		);
 
-		if (!posts) throw Error;
+// 		if (!posts) throw Error;
 
-		return posts;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// 		return posts;
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// }
