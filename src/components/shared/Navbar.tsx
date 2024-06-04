@@ -77,7 +77,9 @@ const navbar = () => {
 										{navigation.map((item) => (
 											<a
 												key={item.name}
-												onClick={() => navigate({item.href})}
+												onClick={() =>
+													navigate(item.href)
+												}
 												className={classNames(
 													item.current
 														? " text-white"
