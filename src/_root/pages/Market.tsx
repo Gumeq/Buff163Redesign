@@ -6,7 +6,7 @@ import {
 } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
 import { Loader } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { useRef } from "react";
 const Market = () => {
 	const { data: recentPosts, isLoading: isPostLoading } = useGetRecentPosts();
 	const { data: cheapPosts, isLoading: isCheapPostLoading } =
