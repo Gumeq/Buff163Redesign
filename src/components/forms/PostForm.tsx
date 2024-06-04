@@ -122,8 +122,24 @@ const PostForm = ({ post, action }: PostFormProps) => {
 		);
 
 	return (
-		<div className="flex flex-col gap-16 w-full  max-w-5xl">
-			<div className="flex flex-row gap-8 items-center">
+		<div className="flex flex-col gap-4 max-w-[400px] bg-dark-3 p-4 rounded-xl">
+			<h1 className="h2-bold">{action} Post</h1>
+			<div className="bg-gradient-to-b from-zinc-400 to-dark-4 rounded-xl relative max-w-[400]">
+				<div className="z-20 text-white absolute bottom-4 left-4 text-xl flex flex-col gap-2">
+					<h1 className="font-bold ">{data.name}</h1>
+					<h1 className=" font-bold">
+						<span className="text-orange-500">$ </span>
+						{data.price}
+					</h1>
+				</div>
+				<div className="bg-orange-500 w-40 h-10 absolute rounded-br-xl rounded-tl-xl text-xl font-bold flex items-center justify-center">
+					Factory New
+				</div>
+				<div className="">
+					<img src={data.img} alt="" />
+				</div>
+			</div>
+			<div className="flex flex-col gap-4 w-full bg-dark-4 p-4 rounded-xl">
 				<h2 className="text-lg font-bold">Select skin to sell</h2>
 				<form action="" className="" onSubmit={handleSearch}>
 					<div className="w-80">
@@ -131,96 +147,84 @@ const PostForm = ({ post, action }: PostFormProps) => {
 					</div>
 				</form>
 			</div>
-			<div className="flex flex-row gap-16">
-				<div className="bg-gradient-to-t from-dark-3 to-white rounded-xl relative max-h-80 max-w-80">
-					<div className="z-20 text-white absolute bottom-4 left-4 text-xl flex flex-col gap-2">
-						<h1 className="font-bold ">{data.name}</h1>
-						<h1 className=" font-bold">
-							<span className="text-orange-500">$ </span>
-							{data.price}
-						</h1>
-					</div>
-					<div className="bg-orange-500 w-40 h-10 absolute rounded-br-xl rounded-tl-xl text-xl font-bold flex items-center justify-center">
-						Factory New
-					</div>
-					<div className="">
-						<img src={data.img} alt="" />
-					</div>
-				</div>
-				<div>
-					<Form {...form}>
-						<form
-							onSubmit={form.handleSubmit(onSubmit)}
-							className="flex flex-col gap-8 w-full"
-						>
-							<FormField
-								control={form.control}
-								name="wear"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel className="shad-form_label">
-											Wear
-										</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="Wear"
-												className="shad-input"
-												{...field}
-											/>
-										</FormControl>
-										<FormDescription className="shad-form_label">
-											<p className="text-zinc-400">
-												Wear value should be smaller
-												than 1
-											</p>
-										</FormDescription>
-										<FormMessage />
-									</FormItem>
+			<div>
+				<Form {...form}>
+					<form
+						onSubmit={form.handleSubmit(onSubmit)}
+						className="flex flex-col gap-8 w-full"
+					>
+						<FormField
+							control={form.control}
+							name="wear"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel className="shad-form_label">
+										Wear
+									</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Wear"
+											className="shad-input"
+											{...field}
+										/>
+									</FormControl>
+									<FormDescription className="shad-form_label">
+										<p className="text-zinc-400">
+											Wear value should be smaller than 1
+										</p>
+									</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<FormField
+							control={form.control}
+							name="price"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel className="shad-form_label">
+										Price
+									</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Price"
+											className="shad-input"
+											{...field}
+										/>
+									</FormControl>
+									<FormDescription className="shad-form_label">
+										<p className="text-zinc-400">
+											Recommended price for {data.name}{" "}
+											is: ${data.price}
+										</p>
+									</FormDescription>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+						<div className="flex flex-row gap-4 items-center justify-between">
+							<Button
+								type="submit"
+								className="shad-button_primary whitespace-nowrap w-1/2 font-bold text-lg"
+								disabled={isLoadingCreate || isLoadingUpdate}
+							>
+								{(isLoadingCreate || isLoadingUpdate) && (
+									<Loader />
 								)}
-							/>
-							<FormField
-								control={form.control}
-								name="price"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel className="shad-form_label">
-											Price
-										</FormLabel>
-										<FormControl>
-											<Input
-												placeholder="Price"
-												className="shad-input"
-												{...field}
-											/>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-							<div className="flex flex-row gap-4 items-center justify-between">
-								<Button
-									type="submit"
-									className="shad-button_primary whitespace-nowrap"
-									disabled={
-										isLoadingCreate || isLoadingUpdate
-									}
-								>
-									{(isLoadingCreate || isLoadingUpdate) && (
-										<Loader />
-									)}
-									{action} Post
-								</Button>
-								<Button
-									type="button"
-									className="shad-button_dark_4 whitespace-nowrap w-1/2"
-								>
-									Cancel
-								</Button>
-							</div>
-						</form>
-					</Form>
-				</div>
+								{action} Post
+							</Button>
+							<Button
+								type="button"
+								className="shad-button_dark_4 whitespace-nowrap w-1/2 font-bold text-lg"
+								onClick={() => navigate("/")}
+							>
+								Cancel
+							</Button>
+						</div>
+					</form>
+				</Form>
 			</div>
+			<div className="flex"></div>
 		</div>
 	);
 };
