@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "@/context/AuthContext";
 
 // Navbar
@@ -18,7 +18,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 
 const navigation = [
-	{ name: "Market", href: "/Market", current: true },
+	{ name: "Market", href: "/market", current: true },
 	{ name: "Sell", href: "/create-post", current: true },
 ];
 
@@ -122,7 +122,8 @@ const navbar = () => {
 										<MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-dark-4 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<MenuItem>
 												{({ focus }) => (
-													<p
+													<Link
+														to={`/profile/${user.id}`}
 														className={classNames(
 															focus
 																? "bg-dark-5"
@@ -130,8 +131,8 @@ const navbar = () => {
 															"block px-4 py-2 text-sm text-white"
 														)}
 													>
-														Your Profile
-													</p>
+														Profile
+													</Link>
 												)}
 											</MenuItem>
 											<MenuItem>

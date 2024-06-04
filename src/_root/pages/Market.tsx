@@ -13,28 +13,6 @@ const Market = () => {
 		useGetCheapPosts();
 
 	const containerRef = useRef<HTMLDivElement | null>(null);
-	// const [visibleCount, setVisibleCount] = useState(20); // Default count
-
-	// useEffect(() => {
-	// 	const resizeObserver = new ResizeObserver((entries) => {
-	// 		if (entries[0].target) {
-	// 			const width = entries[0].contentRect.width;
-	// 			const itemWidth = 180; // Adjust this to your SkinCard width
-	// 			const count = Math.floor(width / itemWidth);
-	// 			setVisibleCount(count);
-	// 		}
-	// 	});
-
-	// 	if (containerRef.current) {
-	// 		resizeObserver.observe(containerRef.current);
-	// 	}
-
-	// 	return () => {
-	// 		if (containerRef.current) {
-	// 			resizeObserver.unobserve(containerRef.current);
-	// 		}
-	// 	};
-	// }, [containerRef]);
 
 	return (
 		<div className="w-full">
@@ -51,7 +29,7 @@ const Market = () => {
 					{isPostLoading && !recentPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto">
+						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto ">
 							{recentPosts?.documents
 								.slice(0, 20)
 								.map((recentPosts: Models.Document) => (
@@ -72,7 +50,7 @@ const Market = () => {
 					{isCheapPostLoading && !cheapPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-1 lg:gap-4 ">
+						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto ">
 							{cheapPosts?.documents
 								.slice(0, 20)
 								.map((cheapPosts: Models.Document) => (

@@ -27,6 +27,7 @@ export const getExterior = (input: string): string => {
 };
 
 const SkinCard = ({ post }: PostCardProps) => {
+	console.log(post);
 	const { data: skinSeller } = useGetUserById(post.seller.$id);
 	const { user } = useUserContext();
 

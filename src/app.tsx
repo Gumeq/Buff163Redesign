@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import CreatePost from "./_root/pages/CreatePost";
 import Market from "./_root/pages/Market";
 import UpdatePost from "./_root/pages/UpdatePost";
+import Profile from "./_root/pages/Profile";
 
 const App = () => {
 	return (
@@ -26,6 +27,7 @@ const App = () => {
 					<Route path="/create-post" element={<CreatePost />} />
 					<Route path="/update-post/:id" element={<UpdatePost />} />
 					<Route path="/market" element={<Market />} />
+					<Route path="/profile/:id/*" element={<Profile />} />
 				</Route>
 			</Routes>
 			<Toaster />
