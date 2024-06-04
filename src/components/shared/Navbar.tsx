@@ -64,7 +64,7 @@ const navbar = () => {
 								<div className="flex flex-shrink-0 items-center">
 									<a
 										className="h3-bold text-slate-100"
-										href="/"
+										onClick={() => navigate("/")}
 									>
 										BUFF
 										<span className="text-orange-500">
@@ -120,8 +120,7 @@ const navbar = () => {
 										<MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-dark-4 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<MenuItem>
 												{({ focus }) => (
-													<a
-														href="#"
+													<p
 														className={classNames(
 															focus
 																? "bg-dark-5"
@@ -130,28 +129,31 @@ const navbar = () => {
 														)}
 													>
 														Your Profile
-													</a>
+													</p>
 												)}
 											</MenuItem>
 											<MenuItem>
 												{({ focus }) => (
-													<a
-														href="/create-post"
+													<p
 														className={classNames(
 															focus
 																? "bg-dark-5"
 																: "",
 															"block px-4 py-2 text-sm text-white"
 														)}
+														onClick={() =>
+															navigate(
+																"/create-post"
+															)
+														}
 													>
 														Sell Skins
-													</a>
+													</p>
 												)}
 											</MenuItem>
 											<MenuItem>
 												{({ focus }) => (
-													<a
-														href="#"
+													<p
 														className={classNames(
 															focus
 																? "bg-dark-5"
@@ -163,7 +165,7 @@ const navbar = () => {
 														}
 													>
 														Sign out
-													</a>
+													</p>
 												)}
 											</MenuItem>
 										</MenuItems>
@@ -179,7 +181,7 @@ const navbar = () => {
 								<DisclosureButton
 									key={item.name}
 									as="a"
-									href={item.href}
+									onClick={() => navigate(item.href)}
 									className={classNames(
 										item.current
 											? "bg-dark-4 text-white"
