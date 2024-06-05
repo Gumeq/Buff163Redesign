@@ -17,7 +17,7 @@ const AdSlider = () => {
 	};
 	const navigate = useNavigate();
 	return (
-		<div className="mt-8 h-80 w-full bg-dark-3">
+		<div className="mt-8 h-80 w-full bg-dark-3 rounded-xl overflow-hidden">
 			<Slider {...settings} className="w-full h-full ">
 				<div className="bg-dark-4 h-80 w-full px-96">
 					<div className="flex flex-row items-center">

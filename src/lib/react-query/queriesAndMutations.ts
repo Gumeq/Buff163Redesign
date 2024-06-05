@@ -5,10 +5,15 @@ import {
 	signOutAccount,
 	createPost,
 	getRecentPosts,
-	getCheapPosts,
 	getUserById,
 	getPostById,
 	updatePost,
+	deletePost,
+	deleteSavedPost,
+	savePost,
+	getCurrentUser,
+	getAkPosts,
+	getM4Posts,
 } from "../appwrite/api";
 import { INewUser, SkinSellProps, SkinSellPropsUpdate } from "@/types";
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -69,10 +74,17 @@ export const useGetRecentPosts = () => {
 		queryFn: getRecentPosts,
 	});
 };
-export const useGetCheapPosts = () => {
+export const useGetAkPosts = () => {
 	return useQuery({
-		queryKey: [QUERY_KEYS.GET_CHEAP_POSTS],
-		queryFn: getCheapPosts,
+		queryKey: [QUERY_KEYS.GET_AK_POSTS],
+		queryFn: getAkPosts,
+	});
+};
+
+export const useGetM4Posts = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_M4_POSTS],
+		queryFn: getM4Posts,
 	});
 };
 
@@ -81,5 +93,61 @@ export const useGetUserById = (userId: string) => {
 		queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
 		queryFn: () => getUserById(userId),
 		enabled: !!userId,
+	});
+};
+
+export const useDeletePost = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: ({ postId }: { postId?: string }) => deletePost(postId),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+			});
+		},
+	});
+};
+
+export const useSavePost = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: ({ userId, postId }: { userId: string; postId: string }) =>
+			savePost(userId, postId),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+			});
+		},
+	});
+};
+
+export const useDeleteSavedPost = () => {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: (savedRecordId: string) => deleteSavedPost(savedRecordId),
+		onSuccess: () => {
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+			});
+		},
+	});
+};
+
+export const useGetCurrentUser = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+		queryFn: getCurrentUser,
 	});
 };

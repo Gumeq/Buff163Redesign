@@ -5,7 +5,7 @@ const Home = () => {
 	const navigate = useNavigate();
 
 	return (
-		<div className="w-full h-dvh patterned-div">
+		<div className="mx-auto max-w-7xl patterned-div">
 			<div className="radial-grad ">
 				<div className="z-10 w-full h-full p-8 flex items-center flex-col gap-4 lg:flex-row-reverse lg:justify-evenly lg:h-3/4 ">
 					<div className="">
@@ -13,8 +13,6 @@ const Home = () => {
 							<img
 								src="/assets/images/hero-main.png"
 								alt="hero-main"
-								max-width={600}
-								max-height={600}
 								className="animated-div"
 							/>
 						</div>

@@ -63,7 +63,7 @@ const navbar = () => {
 							<div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
 								<div className="flex flex-shrink-0 items-center">
 									<a
-										className="h3-bold text-slate-100"
+										className="h3-bold text-slate-100 cursor-pointer"
 										onClick={() => navigate("/")}
 									>
 										BUFF
@@ -84,7 +84,7 @@ const navbar = () => {
 													item.current
 														? " text-white"
 														: "text-gray-300 hover:bg-dark-4 hover:text-white",
-													"rounded-md px-3 py-2 text-sm font-medium"
+													"rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
 												)}
 												aria-current={
 													item.current
@@ -100,7 +100,7 @@ const navbar = () => {
 							</div>
 							<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
 								{/* Profile dropdown */}
-								<Menu as="div" className="relative ml-3">
+								<Menu as="div" className="relative ml-3 z-20">
 									<div>
 										<MenuButton className="relative flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
 											<span className="absolute -inset-1.5" />
@@ -142,15 +142,13 @@ const navbar = () => {
 															focus
 																? "bg-dark-5"
 																: "",
-															"block px-4 py-2 text-sm text-white"
+															"block px-4 py-2 text-sm text-white cursor-pointer"
 														)}
 														onClick={() =>
-															navigate(
-																"/create-post"
-															)
+															navigate("/cart")
 														}
 													>
-														Sell Skins
+														Cart
 													</p>
 												)}
 											</MenuItem>
@@ -161,7 +159,7 @@ const navbar = () => {
 															focus
 																? "bg-dark-5"
 																: "",
-															"block px-4 py-2 text-sm text-white"
+															"block px-4 py-2 text-sm text-white cursor-pointer"
 														)}
 														onClick={() =>
 															signOut()
@@ -189,7 +187,7 @@ const navbar = () => {
 										item.current
 											? "bg-dark-4 text-white"
 											: "text-gray-300 hover:bg-gray-700 hover:text-white",
-										"block rounded-md px-3 py-2 text-base font-medium"
+										"block rounded-md px-3 py-2 text-base font-medium cursor-pointer"
 									)}
 									aria-current={
 										item.current ? "page" : undefined

@@ -178,12 +178,27 @@ export async function getRecentPosts() {
 	}
 }
 
-export async function getCheapPosts() {
+export async function getAkPosts() {
 	try {
 		const posts = await databases.listDocuments(
 			appwriteConfig.databaseId,
 			appwriteConfig.skinsCollectionId,
 			[Query.equal("weapon", ["AK-47"]), Query.limit(20)]
+		);
+
+		if (!posts) throw Error;
+
+		return posts;
+	} catch (error) {
+		console.log(error);
+	}
+}
+export async function getM4Posts() {
+	try {
+		const posts = await databases.listDocuments(
+			appwriteConfig.databaseId,
+			appwriteConfig.skinsCollectionId,
+			[Query.equal("weapon", ["M4A4"]), Query.limit(20)]
 		);
 
 		if (!posts) throw Error;
@@ -226,6 +241,60 @@ export async function updatePost(post: SkinSellPropsUpdate) {
 			throw Error;
 		}
 		return updatedPost;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function deletePost(postId?: string) {
+	if (!postId) return "no post Id";
+
+	try {
+		const statusCode = await databases.deleteDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.skinsCollectionId,
+			postId
+		);
+
+		if (!statusCode) throw Error;
+
+		return { status: "Ok" };
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function savePost(userId: string, postId: string) {
+	try {
+		const updatedPost = await databases.createDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.cartCollectionId,
+			ID.unique(),
+			{
+				user: userId,
+				skins: postId,
+			}
+		);
+
+		if (!updatedPost) throw Error;
+
+		return updatedPost;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function deleteSavedPost(savedRecordId: string) {
+	try {
+		const statusCode = await databases.deleteDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.cartCollectionId,
+			savedRecordId
+		);
+
+		if (!statusCode) throw Error;
+
+		return { status: "Ok" };
 	} catch (error) {
 		console.log(error);
 	}

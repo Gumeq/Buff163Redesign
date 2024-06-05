@@ -10,6 +10,7 @@ import CreatePost from "./_root/pages/CreatePost";
 import Market from "./_root/pages/Market";
 import UpdatePost from "./_root/pages/UpdatePost";
 import Profile from "./_root/pages/Profile";
+import Cart from "./_root/pages/Cart";
 
 const App = () => {
 	return (
@@ -28,6 +29,7 @@ const App = () => {
 					<Route path="/update-post/:id" element={<UpdatePost />} />
 					<Route path="/market" element={<Market />} />
 					<Route path="/profile/:id/*" element={<Profile />} />
+					<Route path="/cart" element={<Cart />} />
 				</Route>
 			</Routes>
 			<Toaster />

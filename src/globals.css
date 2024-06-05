@@ -258,7 +258,7 @@
 	}
 
 	.shad-input {
-		@apply h-12 bg-dark-4 border-none placeholder:text-orange-300 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-orange-300 !important;
+		@apply h-12 bg-dark-4 border-none placeholder:text-gray-500 focus-visible:ring-1 focus-visible:ring-offset-1 ring-offset-orange-300 !important;
 	}
 
 	.shad-textarea {

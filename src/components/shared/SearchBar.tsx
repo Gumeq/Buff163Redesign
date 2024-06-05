@@ -11,7 +11,7 @@ const SearchBar = () => {
 
 	return (
 		<form action="" className="" onSubmit={handleSearch}>
-			<div className="w-80">
+			<div className="max-w-80">
 				<SearchSkin skin={skin} setSkin={setSkin} />
 			</div>
 		</form>

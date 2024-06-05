@@ -54,7 +54,7 @@ const SearchSkin = ({ skin, setSkin }: SearchSkinsProps) => {
 						leaveFrom="opacity-100"
 						leaveTo="opacity-0"
 					>
-						<ComboboxOptions className="search-manufacturer__options w-52">
+						<ComboboxOptions className="search-manufacturer__options">
 							{filteredSkins.length === 0 && query !== "" ? (
 								<ComboboxOption value={query} className="">
 									No skin with name: "{query}"
