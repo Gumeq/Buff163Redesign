@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import {
+	useDeletePost,
 	useDeleteSavedPost,
+	useGetCartPosts,
 	useGetCurrentUser,
 } from "@/lib/react-query/queriesAndMutations";
 import { Models } from "appwrite";
@@ -12,9 +14,14 @@ type PostStatsProps = {
 
 const Cart = () => {
 	const { data: currentUser } = useGetCurrentUser();
+	const { data: cartSkins } = useGetCartPosts(currentUser);
+
+	// console.log(currentUser);
+
 	const navigate = useNavigate();
 
 	const { mutate: deleteSavePost } = useDeleteSavedPost();
+	const { mutate: deletePost } = useDeletePost();
 
 	const products = currentUser?.cart.map((item: PostStatsProps) => {
 		return item;
@@ -32,12 +39,22 @@ const Cart = () => {
 		}
 		return 0; // Return 0 if cart is empty or not present
 	};
+	const totalPrice = calculateTotalPrice();
+
+	const handleCheckout = () => {
+		cartSkins?.documents.map((item: any) => {
+			if (item.user.$id === currentUser?.$id) {
+				console.log(item.skins.$id);
+				return deletePost({ postId: item.skins.$id });
+			}
+		});
+		navigate("/market");
+	};
 
 	const removeProductById = (productId: string) => {
 		return deleteSavePost(productId);
 	};
 
-	const totalPrice = calculateTotalPrice();
 	return (
 		<div className=" py-4 mx-auto w-7xl h-full lg:h-3/4 flex justify-center">
 			<div className="flex h-full flex-col lg:flex-row overflow-y-auto bg-dark-3 rounded-xl">
@@ -130,7 +147,7 @@ const Cart = () => {
 						<Button
 							type="button"
 							className="shad-button_primary w-full h-14 rounded-lg flex flex-row items-center justify-center"
-							onClick={() => console.log("Checkout")}
+							onClick={() => handleCheckout()}
 						>
 							<div className="h3-bold">Checkout</div>
 						</Button>

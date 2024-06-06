@@ -37,8 +37,6 @@ const Profile = () => {
 			</div>
 		);
 
-	console.log(currentUser.skins);
-
 	return (
 		<div className="profile-container">
 			<div className="profile-inner_container">

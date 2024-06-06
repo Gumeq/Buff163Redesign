@@ -8,10 +8,10 @@ type GridPostListProps = {
 
 const GridPostList = ({ skins, showUser = true }: GridPostListProps) => {
 	// const { user } = useUserContext();
-
+	// let userPost: any;
 	return (
 		<ul className="grid-container">
-			{skins.map((post) => (
+			{skins.map((post: Models.Document) => (
 				<li key={post.$id} className="relative w-40 h-40">
 					<Link to={`/update-post/${post.$id}`} className="">
 						<div className="w-full">
@@ -22,7 +22,6 @@ const GridPostList = ({ skins, showUser = true }: GridPostListProps) => {
 							/>
 						</div>
 					</Link>
-
 					<div className="">
 						{showUser && (
 							<div className="flex items-center justify-start gap-2 flex-1">

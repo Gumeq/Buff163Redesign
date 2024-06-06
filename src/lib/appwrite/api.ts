@@ -209,6 +209,22 @@ export async function getM4Posts() {
 	}
 }
 
+export async function getCartPosts(user: any) {
+	try {
+		const posts = await databases.listDocuments(
+			appwriteConfig.databaseId,
+			appwriteConfig.cartCollectionId,
+			user
+		);
+
+		if (!posts) throw Error;
+
+		return posts;
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 // ============================== GET USER BY ID
 export async function getUserById(userId: string) {
 	try {

@@ -13,6 +13,7 @@ export enum QUERY_KEYS {
 	GET_RECENT_POSTS = "getRecentPosts",
 	GET_AK_POSTS = "getAkPosts",
 	GET_M4_POSTS = "getM4Posts",
+	GET_CART_POSTS = "getCartPosts",
 	GET_POST_BY_ID = "getPostById",
 	GET_USER_POSTS = "getUserPosts",
 	GET_FILE_PREVIEW = "getFilePreview",

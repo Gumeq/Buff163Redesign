@@ -14,6 +14,7 @@ import {
 	getCurrentUser,
 	getAkPosts,
 	getM4Posts,
+	getCartPosts,
 } from "../appwrite/api";
 import { INewUser, SkinSellProps, SkinSellPropsUpdate } from "@/types";
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -88,6 +89,14 @@ export const useGetM4Posts = () => {
 	});
 };
 
+export const useGetCartPosts = (user: any) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_CART_POSTS],
+		queryFn: () => getCartPosts(user),
+		// enabled: !!user,
+	});
+};
+
 export const useGetUserById = (userId: string) => {
 	return useQuery({
 		queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
@@ -103,6 +112,12 @@ export const useDeletePost = () => {
 		onSuccess: () => {
 			queryClient.invalidateQueries({
 				queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_POSTS],
+			});
+			queryClient.invalidateQueries({
+				queryKey: [QUERY_KEYS.GET_CURRENT_USER],
 			});
 		},
 	});
