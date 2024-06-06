@@ -15,7 +15,7 @@ Welcome to BUFF163, a modern platform inspired by the popular Buff163 marketplac
 - **Frontend**: 
   - HTML
   - CSS (with Tailwind)
-  - JavaScript (with React & Typescript)
+  - Typescript (with React)
 - **Backend**: 
   - Node.js
   - **Database**: 
