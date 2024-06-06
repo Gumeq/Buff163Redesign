@@ -219,7 +219,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 								<Button
 									type="button"
 									className="shad-button_dark_4 whitespace-nowrap w-1/2 font-bold text-lg"
-									onClick={() => navigate("/")}
+									onClick={() => navigate("/market")}
 								>
 									Cancel
 								</Button>

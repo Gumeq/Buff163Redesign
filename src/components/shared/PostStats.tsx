@@ -51,7 +51,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
 		>
 			{(isSaved && (
 				<div
-					className="bg-red fex flex-row w-full rounded-br-[12px] rounded-tl-[12px] cursor-pointer"
+					className="bg-red rounded-[12px]  w-[160px] h-[30px] flex items-center justify-center cursor-pointer"
 					onClick={handleSavePost}
 				>
 					<div>
@@ -65,7 +65,7 @@ const PostStats = ({ post, userId }: PostStatsProps) => {
 				</div>
 			)) || (
 				<div
-					className="bg-green-500 rounded-br-[12px] rounded-tl-[12px] cursor-pointer"
+					className="bg-green-500 rounded-[12px]  w-[160px] h-[30px] flex items-center justify-center cursor-pointer"
 					onClick={handleSavePost}
 				>
 					<img

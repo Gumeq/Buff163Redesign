@@ -16,18 +16,18 @@ const Market = () => {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
 	return (
-		<div className="mx-auto max-w-7xl">
+		<div className="mx-auto max-w-7xl ">
 			<div className="hidden lg:block">
 				<AdSlider></AdSlider>
 			</div>
 
-			<div ref={containerRef} className=" w-full p-2 ">
+			<div ref={containerRef} className=" w-full p-2 pt-4">
 				<h2 className="h3-bold text-left pb-4">Newest Posts</h2>
 				<div className="">
 					{isPostLoading && !recentPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto ">
+						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto custom-scrollbar ">
 							{recentPosts?.documents
 								.slice(0, 20)
 								.map((recentPosts: Models.Document) => (
@@ -50,7 +50,7 @@ const Market = () => {
 					{isAkPostLoading && !akPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto ">
+						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto custom-scrollbar ">
 							{akPosts?.documents
 								.slice(0, 20)
 								.map((cheapPosts: Models.Document) => (
@@ -73,7 +73,7 @@ const Market = () => {
 					{isM4PostLoading && !akPosts ? (
 						<Loader />
 					) : (
-						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto ">
+						<ul className="flex flex-row gap-1 lg:gap-4 overflow-x-auto custom-scrollbar ">
 							{m4Posts?.documents
 								.slice(0, 20)
 								.map((cheapPosts: Models.Document) => (

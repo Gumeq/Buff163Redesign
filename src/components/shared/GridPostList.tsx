@@ -13,20 +13,17 @@ const GridPostList = ({ skins, showUser = true }: GridPostListProps) => {
 		<ul className="grid-container">
 			{skins.map((post) => (
 				<li key={post.$id} className="relative w-40 h-40">
-					<Link
-						to={`/update-post/${post.$id}`}
-						className="grid-post_link"
-					>
+					<Link to={`/update-post/${post.$id}`} className="">
 						<div className="w-full">
 							<img
 								src={post.imageUrl}
 								alt="post"
-								className="h-full w-full absolute top-0 left-0"
+								className="h-full w-full absolute top-0 left-0 bg-dark-3 rounded-[12px]"
 							/>
 						</div>
 					</Link>
 
-					<div className="grid-post_user">
+					<div className="">
 						{showUser && (
 							<div className="flex items-center justify-start gap-2 flex-1">
 								<img

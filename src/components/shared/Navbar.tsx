@@ -38,7 +38,7 @@ const navbar = () => {
 	}, [isSuccess]);
 
 	return (
-		<Disclosure as="nav" className="bg-dark-3">
+		<Disclosure as="nav" className="bg-dark-3 z-30">
 			{({ open }) => (
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -119,7 +119,7 @@ const navbar = () => {
 										leaveFrom="transform opacity-100 scale-100"
 										leaveTo="transform opacity-0 scale-95"
 									>
-										<MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-dark-4 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+										<MenuItems className="absolute right-0 z-30 mt-2 w-48 origin-top-right rounded-md bg-dark-4 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
 											<MenuItem>
 												{({ focus }) => (
 													<Link

@@ -34,7 +34,7 @@ const SkinCard = ({ post }: PostCardProps) => {
 	const ItemUse = () => {
 		if (user.id === post.seller.$id) {
 			return (
-				<div className="bg-orange-500 rounded-br-[12px] rounded-tl-[12px] w-[30px] h-[30px] flex items-center justify-center">
+				<div className="bg-orange-500 rounded-[12px]  w-[160px] h-[30px] flex items-center justify-center">
 					<Link to={`/update-post/${post.$id}`}>
 						<img
 							src="/assets/icons/edit.svg"
@@ -52,22 +52,23 @@ const SkinCard = ({ post }: PostCardProps) => {
 
 	return (
 		<div className="flex flex-col items-center relative h-[260px] overflow-hidden mb-4">
-			<div className=" z-20 bg-gradient-to-t from-zinc-400 to-dark-4 rounded-tl-[12px] rounded-tr-[12px] h-[160px] w-[180px] p-2">
+			<div className=" z-10 bg-dark-4 rounded-tl-[12px] rounded-tr-[12px] h-[160px] w-[180px] p-2">
 				<div className="absolute font-bold text-sm text-nowrap w-[160px] overflow-hidden">
 					<h2 className=" ">{post.name}</h2>
 					<h2 className="text-zinc-400 text-xs">
 						{getExterior(post.wear)}
 					</h2>
 				</div>
-
-				<img
-					src={post.imageUrl}
-					alt="img"
-					className="absolute  w-full "
-				/>
+				<div>
+					<img
+						src={post.imageUrl}
+						alt="img"
+						className="absolute  w-full "
+					/>
+				</div>
 			</div>
-			<div className="z-40 bg-gradient-to-b from-zinc-400 to-orange-500 h-[12px] w-[180px]"></div>
-			<div className=" absolute bottom-0 left-0 pt-12 h-[120px] w-[180px] bg-dark-3 rounded-[12px]  ">
+
+			<div className=" absolute bottom-0 left-0 pt-8 h-[120px] w-[180px] bg-dark-3 rounded-[12px]  ">
 				<div className="flex flex-col w-full h-full gap-1">
 					<div className="z-20 text-white flex flex-row w-full justify-between items-center px-2">
 						<h2 className=" font-bold text-lg">
@@ -88,10 +89,8 @@ const SkinCard = ({ post }: PostCardProps) => {
 							)}
 						</div>
 					</div>
-					<div className="flex flex-row justify-between items-center pt-2 ">
-						<div className="text-sm text-zinc-300 px-2">
-							{post.wear}
-						</div>
+					<div className="flex flex-row justify-between items-center pt-2 "></div>
+					<div className=" flex items-center justify-center">
 						<ItemUse></ItemUse>
 					</div>
 				</div>

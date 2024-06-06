@@ -19,7 +19,7 @@ const AdSlider = () => {
 	return (
 		<div className="mt-8 h-80 w-full bg-dark-3 rounded-xl overflow-hidden">
 			<Slider {...settings} className="w-full h-full ">
-				<div className="bg-dark-4 h-80 w-full px-96">
+				<div className="bg-dark-4 h-80 w-full px-12">
 					<div className="flex flex-row items-center">
 						<div className="w-1/2 flex flex-col gap-4">
 							<h2 className="h2-bold">
@@ -42,7 +42,7 @@ const AdSlider = () => {
 						</div>
 					</div>
 				</div>
-				<div className="bg-green-500 h-80 w-full">1</div>
+				<div className=""></div>
 			</Slider>
 		</div>
 	);

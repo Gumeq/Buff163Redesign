@@ -39,9 +39,9 @@ const Cart = () => {
 
 	const totalPrice = calculateTotalPrice();
 	return (
-		<div className=" py-4 h-full flex justify-center">
-			<div className="flex h-full flex-col overflow-y-auto bg-dark-4 ">
-				<div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+		<div className=" py-4 mx-auto w-7xl h-full lg:h-3/4 flex justify-center">
+			<div className="flex h-full flex-col lg:flex-row overflow-y-auto bg-dark-3 rounded-xl">
+				<div className="overflow-y-auto px-4 py-6 sm:px-6 custom-scrollbar">
 					<div className="flex items-start justify-between">
 						<h1 className="text-lg font-medium text-white">
 							Skins Cart
@@ -49,17 +49,14 @@ const Cart = () => {
 					</div>
 					<div className="mt-8">
 						<div className="flow-root">
-							<ul
-								role="list"
-								className="-my-6 divide-y divide-gray-200"
-							>
+							<ul role="list" className="flex flex-col gap-4">
 								{products &&
 									products.map((product: Models.Document) => (
 										<li
 											key={product.$id}
-											className="flex py-6"
+											className="flex py-6 bg-dark-4 p-4 rounded-md"
 										>
-											<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md  bg-dark-6">
+											<div className="h-32 w-32 flex-shrink-0 overflow-hidden rounded-md  bg-dark-5">
 												<img
 													src={product.skins.imageUrl}
 													alt={product.skins.imageAlt}
@@ -121,7 +118,7 @@ const Cart = () => {
 					</div>
 				</div>
 
-				<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+				<div className="border-t lg:border-0 border-gray-200 px-4 py-6 sm:px-6 max-w-[500px]  ">
 					<div className="flex justify-between text-base font-medium text-white">
 						<p>Subtotal</p>
 						<p>{totalPrice.toFixed(2)} $</p>
