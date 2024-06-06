@@ -32,7 +32,7 @@ Welcome to BUFF163, a modern platform inspired by the popular Buff163 marketplac
 
 ## Contact
 
-For any inquiries or support, please contact us at [your-email@example.com](mailto:your-email@example.com).
+For any inquiries or support, please contact us at [GumekTV@gmail.com](mailto:gumekTV@gmail.com).
 
 ---
 
