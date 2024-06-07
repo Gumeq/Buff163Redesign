@@ -9,10 +9,15 @@ import { Models } from "appwrite";
 import { Loader } from "lucide-react";
 import { useRef } from "react";
 const Market = () => {
+	// GET THE ITEMS OF DIFFERENT CATEGORIES
+	// RECENT
 	const { data: recentPosts, isLoading: isPostLoading } = useGetRecentPosts();
+	// AK
 	const { data: akPosts, isLoading: isAkPostLoading } = useGetAkPosts();
+	// M4A4
 	const { data: m4Posts, isLoading: isM4PostLoading } = useGetM4Posts();
-
+	// USED TO GET THE WIDTH OF THE DIV, WAS USED AT THE START LATER FOUND A BETTER SOLUTION.
+	// KEEPING CAUSE IT BREAKS AND I HAVE NO TIME TO CHECK WHY
 	const containerRef = useRef<HTMLDivElement | null>(null);
 
 	return (

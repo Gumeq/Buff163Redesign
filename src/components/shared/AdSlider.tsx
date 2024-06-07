@@ -4,6 +4,10 @@ import Slider from "react-slick";
 import { Button } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
+// THIS IS AN AD SLIDE
+// AD SLIDER WORKS
+// AD SLIDER WAS BASICALLY A COPY PASTE
+
 const AdSlider = () => {
 	var settings = {
 		dots: false,

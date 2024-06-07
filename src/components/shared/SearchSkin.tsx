@@ -16,12 +16,17 @@ import { useState, Fragment } from "react";
 import SkinsCardSearch from "./SkinsCardSearch";
 
 const SearchSkin = ({ skin, setSkin }: SearchSkinsProps) => {
+	// QUERY OR THE NAME OF THE SKIN YOU'RE SEARCHING FOR
 	const [query, setQuery] = useState("");
 
+	// HEAR ME OUT... FILTERING
 	const filteredSkins =
+		// START FILTERING WHEN STRING IS > 2, THERE IS NO SKIS WITH LESS THAN 2 LETTERS
+		// ALSO SPEEDS UP SEARCH AND MAKES LESS API CALLS
 		query.length <= 2
 			? []
-			: skins.filter((item) =>
+			: // CHATGPT WROTE THIS PART, IT WORKS,I GUESS IDK, JS IS WEIRD WITH STRINGS...
+			  skins.filter((item) =>
 					item
 						.toLowerCase()
 						.replace(/\s+/g, "")

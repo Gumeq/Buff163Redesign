@@ -1,9 +1,13 @@
+// API! YAAAAAY
+
 import { FilterProps } from "@/types";
 
+// TRANSFORM THE NAMES OF ITEMS FROM THE LIST IN /CONSTANTS TO A STRING THAT THE API WILL UNDERSTAND
 export const transformString = (input: string): string => {
 	return input.replace(/\s*\|\s*/g, "_").replace(/\s+/g, "_");
 };
 
+// FETCH
 export async function fetchSkin(filters: FilterProps) {
 	const apiname = transformString(filters.name);
 

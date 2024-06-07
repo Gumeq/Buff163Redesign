@@ -22,13 +22,15 @@ import { useUserContext } from "@/context/AuthContext";
 const SignInForm = () => {
 	const { toast } = useToast();
 
+	// GET USER FROM LOCAL DATA, AGAIN...
 	const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
 	const navigate = useNavigate();
 
+	// SIGN IN
 	const { mutateAsync: signInAccount } = useSignInAccount();
 
-	// 1. Define your form.
+	// FORM VALIDATION USING ZOD, EASIER, FASTER, BETTER , STRONGER
 	const form = useForm<z.infer<typeof SignInValidation>>({
 		resolver: zodResolver(SignInValidation),
 		defaultValues: {
@@ -37,16 +39,20 @@ const SignInForm = () => {
 		},
 	});
 
-	// 2. Define a submit handler.
+	// SUBMIT
 	async function onSubmit(values: z.infer<typeof SignInValidation>) {
+		// CREATE SESSION AND LOG IN
 		const session = await signInAccount({
 			email: values.email,
 			password: values.password,
 		});
 
+		// IF IT DIDNT WORK..TOO BAD
 		if (!session) {
 			return toast({ title: "Sign in failed. Please try again." });
 		}
+
+		// CHECK IF WE FINALLY GOT LOGGED
 
 		const isLoggedIn = await checkAuthUser();
 

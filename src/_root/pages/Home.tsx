@@ -1,6 +1,9 @@
 import { Button } from "@headlessui/react";
 import { useNavigate } from "react-router-dom";
 
+// SWEET HOME ALAB..
+//HOM PAGE
+
 const Home = () => {
 	const navigate = useNavigate();
 

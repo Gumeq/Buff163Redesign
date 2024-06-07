@@ -17,6 +17,8 @@ import {
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useSignOutAccount } from "@/lib/react-query/queriesAndMutations";
 
+// NAV LINK LEFT
+
 const navigation = [
 	{ name: "Market", href: "/market", current: true },
 	{ name: "Sell", href: "/create-post", current: true },
@@ -29,9 +31,14 @@ function classNames(
 }
 
 const navbar = () => {
+	// GETTING THE USER
+	// USED FOR ICON MOSTLY, COMES IN HANDY MULTIPLE TIMES
 	const { user } = useUserContext();
 
+	// SIGN OUT , SELF EXPLANATORY
 	const { mutate: signOut, isSuccess } = useSignOutAccount();
+
+	// IF SIGNED OUT, TAKE ME TO SIGN IN PAGE
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (isSuccess) navigate(0);

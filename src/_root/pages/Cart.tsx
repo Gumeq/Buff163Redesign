@@ -12,40 +12,57 @@ type PostStatsProps = {
 	skins: Models.Document;
 };
 
+// CART PROBABLY COULD BE A COMPONENT, BUT I STARTED IT HERE SO DEAL WITH IT
 const Cart = () => {
 	const { data: currentUser } = useGetCurrentUser();
 	const { data: cartSkins } = useGetCartPosts(currentUser);
 
-	// console.log(currentUser);
-
 	const navigate = useNavigate();
 
+	// DELETE POST AND CART POST
 	const { mutate: deleteSavePost } = useDeleteSavedPost();
 	const { mutate: deletePost } = useDeletePost();
 
+	// GET ALL THE ITEMS IN THE CART INTO AN ARRAY
+	// MAKES IT EASIER FOR REACT LATER ON
 	const products = currentUser?.cart.map((item: PostStatsProps) => {
 		return item;
 	});
 
+	// CALCULATE TOTAL PRICE OF ITEMS
 	const calculateTotalPrice = (): number => {
 		// Check if the cart is present and has items
 		if (currentUser?.cart && currentUser?.cart.length > 0) {
 			return currentUser?.cart.reduce(
+				// BASICALLY TOTAL = TOTAL+ITEM BUT THIS WAY IS FANCIER
 				(total: number, item: Models.Document) => {
+					// PRICE IS A STRING IN DB, CAUSE WHY NOT, SO I MAKE IT A NUMBER HERE
+					// OK ACTUALLY PRICE IS STRING IN DB CAUSE THE API PRICE IS ALSO STRING SO NOT MY FAULT
 					return total + parseFloat(item.skins.price);
 				},
 				0
-			); // Start accumulating from 0
+			); // START ACCUMULATING FROM 0
 		}
-		return 0; // Return 0 if cart is empty or not present
+		return 0; // RETURN 0 IF CART EMPTY OR NO CART
 	};
 	const totalPrice = calculateTotalPrice();
 
+	// CHECKOUT
 	const handleCheckout = () => {
+		// GET ALL SKINS FROM CART
 		cartSkins?.documents.map((item: any) => {
+			// SINCE CART IS BASICALLY A DIFFERENT COLLECTION 
+			// THE ITEM AND THE USER ARE STORED IN THE CART 
+			// SO WE NEED TO CHECK WHICH ITEMS BELONG TO THE USER
+			// IS THERE AN EASIER WAY? PROBABLY
+			// DID I FIND IT? NO 
 			if (item.user.$id === currentUser?.$id) {
-				console.log(item.skins.$id);
+				// IF THE ITEM IN THE CART BELONGS TO THE USER
+				// console.log(item.skins.$id);
 				return deletePost({ postId: item.skins.$id });
+				// DELETE THE ITEM FROM THE DATABASE ENTIRELY
+				// NO REASON TO KEEP IT 
+				// NO TAKESIES BACKSIES
 			}
 		});
 		navigate("/market");

@@ -8,6 +8,7 @@ const SkinsCardSearch = (searchParams: FilterProps) => {
 	const [loading, setLoading] = useState<boolean>(true);
 	const { item, setItem } = useSkins();
 
+	// GET THE NAME FROM THE USER , SEARCH THE API, RETURN RESULTS, EZ
 	useEffect(() => {
 		const getData = async () => {
 			try {
@@ -22,6 +23,7 @@ const SkinsCardSearch = (searchParams: FilterProps) => {
 
 		getData();
 	}, [searchParams.name, setItem]);
+	// REPEAT EVERY TIME THE NAME CHANGES, OR THE ITEM IS FOUND
 
 	if (loading) return <p>Loading...</p>;
 	console.log(item);

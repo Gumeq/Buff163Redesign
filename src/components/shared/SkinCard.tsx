@@ -12,6 +12,9 @@ export const getExterior = (input: string): string => {
 	const num = parseFloat(input);
 	let exterior = "";
 
+	// THIS IS GAME RELATED ONLY BASICALLY SET NUMBER TO STRING
+	// NO REAL NEED FOR THIS BUT IT LOOKS COOLER
+	// ALSO GOOD FOR FUTURE FILTERING OPTIONS
 	if (num <= 0.07) {
 		exterior = "Factory New";
 	} else if (num > 0.07 && num <= 0.15) {

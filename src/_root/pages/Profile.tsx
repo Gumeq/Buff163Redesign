@@ -24,12 +24,17 @@ const StatBlock = ({ value, label }: StabBlockProps) => (
 );
 
 const Profile = () => {
+	// GET THE ID OF THE USER FROM THE LINK-PATHNAME
 	const { id } = useParams();
+	// GET USER OBJECT FROM THE CONTEXT
 	const { user } = useUserContext();
+	// THE PATHNAME-LINK
 	const { pathname } = useLocation();
-
+	// GET USER BY ID, SO BASICALLY useUserContext() BUT DIFFERENT
+	// AGAIN DONT KNOW WHY DIFFERENT BUT IT WORKS THIS WAY OK :)
 	const { data: currentUser } = useGetUserById(id || "");
 
+	// IF THERE IS NO USER... WAIT
 	if (!currentUser)
 		return (
 			<div className="flex-center w-full h-full">

@@ -42,8 +42,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const checkAuthUser = async () => {
 		setIsLoading(true);
 		try {
+			// GET CURRENT ACCOUNT
 			const currentAccount = await getCurrentUser();
+			// IF THERE IS AN ACCOUNT
 			if (currentAccount) {
+				// SET ACCOUNT ATTRIBUTES
 				setUser({
 					id: currentAccount.$id,
 					name: currentAccount.name,
@@ -52,11 +55,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 					imageUrl: currentAccount.imageUrl,
 					bio: currentAccount.bio,
 				});
+				// SET ACCOUNT ACTIVE
 				setIsAuthenticated(true);
 
 				return true;
 			}
-
+			// OTHERWISE RETURN ERROR
 			return false;
 		} catch (error) {
 			console.error(error);
@@ -66,6 +70,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		}
 	};
 
+	// USING LOCAL STORAGE TO STORE ACCOUNT AUTHENTICATION
+	// NOT DATA ! JUST IF THERE WAS A USER LOGGED IN BEFORE
 	useEffect(() => {
 		const cookieFallback = localStorage.getItem("cookieFallback");
 		if (

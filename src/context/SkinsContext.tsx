@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+// THIS IS USED FOR SOME REASON, I DON'T THINK IT WAS NECESSARY, IT WORKS THO
+
 interface Skin {
 	img: string;
 	name: string;

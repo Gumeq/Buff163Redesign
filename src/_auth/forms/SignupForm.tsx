@@ -21,19 +21,26 @@ import {
 	useSignInAccount,
 } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
+
+// SIGN UP FORM
 const SignUpForm = () => {
+	// POPUP WINDOW FOR ERRORS ALSO KNOWN AS TOAST, YUM
 	const { toast } = useToast();
 
+	// useUserContext() TO GET THE USER IF THERE ALREADY IS ONE LOGGED IN
 	const { checkAuthUser } = useUserContext();
 
 	const navigate = useNavigate();
 
+	// CREATE ACCOUNT
 	const { mutateAsync: createUserAccount, isPending: isCreatingAccount } =
 		useCreateUserAccount();
 
+	// SIGN IN
 	const { mutateAsync: signInAccount } = useSignInAccount();
 
-	// 1. Define your form.
+	// FORM VALIDATION USING ZOD
+	// COULD I HAVE DONE THIS WITHOUT ZOD, YES , BUT TOO MUCH WORK FOR NO REASON
 	const form = useForm<z.infer<typeof SignUpValidation>>({
 		resolver: zodResolver(SignUpValidation),
 		defaultValues: {
@@ -43,11 +50,12 @@ const SignUpForm = () => {
 		},
 	});
 
-	// 2. Define a submit handler.
+	// SUBMIT
 	async function onSubmit(values: z.infer<typeof SignUpValidation>) {
 		// Create User
 		const newUser = await createUserAccount(values);
 
+		// IF IT DIDNT CREATE USER, WELL TOO BAD TRY AGAIN
 		if (!newUser) {
 			return toast({
 				title: "Sign up failed. Please try again.",
@@ -55,15 +63,18 @@ const SignUpForm = () => {
 			});
 		}
 
+		// SINCE WE HAVE AN ACCOUNT NOW WE CAN LOG IN
 		const session = await signInAccount({
 			email: values.email,
 			password: values.password,
 		});
 
+		// IF WE DIDNT LOG IN, STH WENT WRONG
 		if (!session) {
 			return toast({ title: "Sign in failed. Please try again." });
 		}
 
+		// CHECKING IF WE FINALLY GOT LOGGED
 		const isLoggedIn = await checkAuthUser();
 
 		if (isLoggedIn) {
@@ -71,6 +82,7 @@ const SignUpForm = () => {
 
 			navigate("/");
 		} else {
+			// TOO BAD
 			return toast({ title: "Sign up failed. Plase try again." });
 		}
 	}

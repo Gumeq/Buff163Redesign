@@ -1,13 +1,14 @@
 "use client";
-import SearchSkin from "../shared/SearchSkin";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { fetchSkin } from "@/utils";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useNavigate } from "react-router-dom";
+import SearchSkin from "../shared/SearchSkin";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,13 +21,17 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+
 import { PostValidation } from "@/lib/validation";
-import { Models } from "appwrite";
 import {
 	useCreatePost,
 	useUpdatePost,
 } from "@/lib/react-query/queriesAndMutations";
+
+import { Models } from "appwrite";
+
 import { useUserContext } from "@/context/AuthContext";
+
 import { useToast } from "../ui/use-toast";
 import { Loader } from "lucide-react";
 
@@ -53,7 +58,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 		e.preventDefault();
 	};
 
-	// 1. Define your form.
+	// 	FORM VALIDATION USING ZOD
 	const form = useForm<z.infer<typeof PostValidation>>({
 		resolver: zodResolver(PostValidation),
 		defaultValues: {
@@ -62,18 +67,17 @@ const PostForm = ({ post, action }: PostFormProps) => {
 		},
 	});
 
-	// 2. Define a submit handler.
+	// FORM ON SUBMIT HANDLING
 	async function onSubmit(values: z.infer<typeof PostValidation>) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
-		// ACTION = UPDATE
+		// IF THERE IS A POST AND ACTION IS UPDATE
 		if (post && action === "Update") {
+			// CHANGE POSTS ATTRIBUTES
 			const updatedPost = await updatePost({
 				postId: post.$id,
 				wear: values.wear,
 				price: values.price,
 			});
-
+			// IF POST DIDN'T UPDATE, TELL ME WHY..
 			if (!updatedPost) {
 				toast({
 					title: `${action} post failed. Please try again.`,
@@ -81,6 +85,8 @@ const PostForm = ({ post, action }: PostFormProps) => {
 				return navigate(`/update-post/${post.$id}`);
 			}
 		} else {
+			// IF ACTION IS CREATE, CREATE A POST, I KNOW CRAZY
+			// SET POST ATTRIBUTES
 			const newPost = await createPost({
 				seller: user.id,
 				name: data.name,
@@ -89,6 +95,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 				wear: values.wear,
 				price: values.price,
 			});
+			// IF IT DIDN'T WORK, PLEASE WORK
 			if (!newPost) {
 				toast({
 					title: "Please try again",
@@ -98,6 +105,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
 		navigate("/");
 	}
 
+	// GETTING SKIN FROM API USING NAME
 	useEffect(() => {
 		const getData = async () => {
 			try {
@@ -112,7 +120,9 @@ const PostForm = ({ post, action }: PostFormProps) => {
 
 		getData();
 	}, [skin]);
+	// WHENEVER SKIN NAME CHANGES, CALL THIS FUNCTION
 
+	// LOADING..........
 	if (loading)
 		return (
 			<div>

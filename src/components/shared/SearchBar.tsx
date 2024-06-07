@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import SearchSkin from "./SearchSkin";
 
+// SEARCH BAR!
 const SearchBar = () => {
 	const [skin, setSkin] = useState("");
 	const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {

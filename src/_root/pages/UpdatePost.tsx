@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 const UpdatePost = () => {
 	const { id } = useParams();
+	// GET THE POST FROM THE ID PROVIDED
 	const { data: post, isPending } = useGetPostById(id || "");
 
 	if (isPending)

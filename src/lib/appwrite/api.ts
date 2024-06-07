@@ -80,7 +80,7 @@ export async function getAccount() {
 	}
 }
 
-// ============================== GET USER
+// ============================== GET CURRENT USER
 export async function getCurrentUser() {
 	try {
 		const currentAccount = await getAccount();
@@ -99,6 +99,23 @@ export async function getCurrentUser() {
 	} catch (error) {
 		console.log(error);
 		return null;
+	}
+}
+
+// ============================== GET USER BY ID
+export async function getUserById(userId: string) {
+	try {
+		const user = await databases.getDocument(
+			appwriteConfig.databaseId,
+			appwriteConfig.userCollectionId,
+			userId
+		);
+
+		if (!user) throw Error;
+
+		return user;
+	} catch (error) {
+		console.log(error);
 	}
 }
 
@@ -162,6 +179,8 @@ export async function getPostById(postId?: string) {
 	}
 }
 
+// ============================== GET RECENT POSTS
+
 export async function getRecentPosts() {
 	try {
 		const posts = await databases.listDocuments(
@@ -178,6 +197,8 @@ export async function getRecentPosts() {
 	}
 }
 
+// ============================== GET AK POSTS
+
 export async function getAkPosts() {
 	try {
 		const posts = await databases.listDocuments(
@@ -193,6 +214,9 @@ export async function getAkPosts() {
 		console.log(error);
 	}
 }
+
+// ============================== GET M4A4 POSTS
+
 export async function getM4Posts() {
 	try {
 		const posts = await databases.listDocuments(
@@ -208,6 +232,8 @@ export async function getM4Posts() {
 		console.log(error);
 	}
 }
+
+// ============================== GET CART POSTS
 
 export async function getCartPosts(user: any) {
 	try {
@@ -225,22 +251,7 @@ export async function getCartPosts(user: any) {
 	}
 }
 
-// ============================== GET USER BY ID
-export async function getUserById(userId: string) {
-	try {
-		const user = await databases.getDocument(
-			appwriteConfig.databaseId,
-			appwriteConfig.userCollectionId,
-			userId
-		);
-
-		if (!user) throw Error;
-
-		return user;
-	} catch (error) {
-		console.log(error);
-	}
-}
+// ============================== UPDATE POSTS
 
 export async function updatePost(post: SkinSellPropsUpdate) {
 	try {
@@ -262,6 +273,8 @@ export async function updatePost(post: SkinSellPropsUpdate) {
 	}
 }
 
+// ============================== DELETE POSTS
+
 export async function deletePost(postId?: string) {
 	if (!postId) return "no post Id";
 
@@ -279,6 +292,8 @@ export async function deletePost(postId?: string) {
 		console.log(error);
 	}
 }
+
+// ============================== SAVE (ADD TO CART) POSTS
 
 export async function savePost(userId: string, postId: string) {
 	try {
@@ -299,6 +314,8 @@ export async function savePost(userId: string, postId: string) {
 		console.log(error);
 	}
 }
+
+// ============================== DELETE SAVE (REMOVE FROM CART) POSTS
 
 export async function deleteSavedPost(savedRecordId: string) {
 	try {

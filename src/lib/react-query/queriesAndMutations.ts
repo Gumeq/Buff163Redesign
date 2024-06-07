@@ -19,11 +19,19 @@ import {
 import { INewUser, SkinSellProps, SkinSellPropsUpdate } from "@/types";
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
 
+// ============================================================
+// AUTH
+// ============================================================
+
+// ============================== SIGN UP
+
 export const useCreateUserAccount = () => {
 	return useMutation({
 		mutationFn: (user: INewUser) => createUserAccount(user),
 	});
 };
+
+// ============================== SIGN IN
 
 export const useSignInAccount = () => {
 	return useMutation({
@@ -32,11 +40,39 @@ export const useSignInAccount = () => {
 	});
 };
 
+// ============================== SIGN OUT
+
 export const useSignOutAccount = () => {
 	return useMutation({
 		mutationFn: signOutAccount,
 	});
 };
+
+// ============================== SIGN OUT
+
+export const useGetUserById = (userId: string) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
+		queryFn: () => getUserById(userId),
+		enabled: !!userId,
+	});
+};
+
+// ============================== GET CURRENT USER
+
+export const useGetCurrentUser = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+		queryFn: getCurrentUser,
+	});
+};
+
+// ============================================================
+// POSTS
+// ============================================================
+
+// ============================== CREATE POST
+
 export const useCreatePost = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
@@ -48,6 +84,8 @@ export const useCreatePost = () => {
 		},
 	});
 };
+
+// ============================== UPDATE POST
 
 export const useUpdatePost = () => {
 	const queryClient = useQueryClient();
@@ -61,6 +99,8 @@ export const useUpdatePost = () => {
 	});
 };
 
+// ============================== UPDATE POST
+
 export const useGetPostById = (postId?: string) => {
 	return useQuery({
 		queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
@@ -69,41 +109,7 @@ export const useGetPostById = (postId?: string) => {
 	});
 };
 
-export const useGetRecentPosts = () => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
-		queryFn: getRecentPosts,
-	});
-};
-export const useGetAkPosts = () => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_AK_POSTS],
-		queryFn: getAkPosts,
-	});
-};
-
-export const useGetM4Posts = () => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_M4_POSTS],
-		queryFn: getM4Posts,
-	});
-};
-
-export const useGetCartPosts = (user: any) => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_CART_POSTS],
-		queryFn: () => getCartPosts(user),
-		// enabled: !!user,
-	});
-};
-
-export const useGetUserById = (userId: string) => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
-		queryFn: () => getUserById(userId),
-		enabled: !!userId,
-	});
-};
+// ============================== DELETE POSTS
 
 export const useDeletePost = () => {
 	const queryClient = useQueryClient();
@@ -122,6 +128,45 @@ export const useDeletePost = () => {
 		},
 	});
 };
+
+// ============================== GET RECENT POSTS
+
+export const useGetRecentPosts = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
+		queryFn: getRecentPosts,
+	});
+};
+
+// ============================== GET AK POSTS
+
+export const useGetAkPosts = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_AK_POSTS],
+		queryFn: getAkPosts,
+	});
+};
+
+// ============================== GET M4A4 POSTS
+
+export const useGetM4Posts = () => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_M4_POSTS],
+		queryFn: getM4Posts,
+	});
+};
+
+// ============================== GET CART POSTS
+
+export const useGetCartPosts = (user: any) => {
+	return useQuery({
+		queryKey: [QUERY_KEYS.GET_CART_POSTS],
+		queryFn: () => getCartPosts(user),
+		// enabled: !!user,
+	});
+};
+
+// ============================== SAVE POST (TO CART)
 
 export const useSavePost = () => {
 	const queryClient = useQueryClient();
@@ -142,6 +187,8 @@ export const useSavePost = () => {
 	});
 };
 
+// ============================== DELETE SAVED POST (FROM CART)
+
 export const useDeleteSavedPost = () => {
 	const queryClient = useQueryClient();
 	return useMutation({
@@ -157,12 +204,5 @@ export const useDeleteSavedPost = () => {
 				queryKey: [QUERY_KEYS.GET_CURRENT_USER],
 			});
 		},
-	});
-};
-
-export const useGetCurrentUser = () => {
-	return useQuery({
-		queryKey: [QUERY_KEYS.GET_CURRENT_USER],
-		queryFn: getCurrentUser,
 	});
 };
